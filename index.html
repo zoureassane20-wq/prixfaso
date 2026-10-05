@@ -3,12 +3,136 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PrixFaso</title>
+<meta name="theme-color" content="#0f766e">
+<title>PrixFaso — Prix, locations et services au Burkina Faso</title>
+<style>
+:root{--p:#0f766e;--p2:#115e59;--a:#f59e0b;--bg:#f6f8f7;--card:#fff;--text:#17211f;--muted:#66736f;--border:#e2e8e5;--danger:#dc2626;--shadow:0 8px 30px #12332b12}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
+button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}.top{background:#073b36;color:#fff;padding:7px 5%;font-size:13px;text-align:center}
+nav{height:68px;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:18px;padding:0 5%;position:sticky;top:0;z-index:20}.logo{font-weight:900;font-size:25px;color:var(--p);margin-right:auto}.logo span{color:var(--a)}
+.navlinks{display:flex;gap:7px}.navlinks button,.account button{background:transparent;color:var(--text);padding:10px 12px;border-radius:9px}.navlinks button:hover,.account button:hover{background:#eef5f3}.primary{background:var(--p)!important;color:#fff!important}.outline{border:1px solid var(--p)!important;color:var(--p)!important;background:#fff!important}
+main{max-width:1180px;margin:auto;padding:28px 18px 70px}.hero{background:linear-gradient(120deg,#0b5d55,#15927f);color:#fff;border-radius:24px;padding:38px 30px;box-shadow:var(--shadow)}.hero h1{font-size:clamp(30px,6vw,54px);line-height:1.05;margin:0 0 12px}.hero p{max-width:700px;font-size:17px;color:#e6fffb}.search{background:#fff;border-radius:15px;padding:8px;display:flex;gap:8px;max-width:900px;margin-top:22px}.search input,.search select{border:0;outline:0;padding:12px;min-width:0}.search input{flex:1}.search button{padding:12px 18px;border-radius:10px;background:var(--a);color:#201500;font-weight:700}
+.section{margin-top:32px}.section h2{margin:0 0 16px}.chips{display:flex;gap:9px;overflow:auto;padding-bottom:5px}.chip{background:#fff;border:1px solid var(--border);padding:9px 14px;border-radius:999px;white-space:nowrap}.chip.active{background:#e2f4f0;border-color:#9ad5cb;color:var(--p);font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 2px 12px #12332b08}.thumb{height:150px;background:linear-gradient(135deg,#d9eee9,#f7dca7);display:flex;align-items:center;justify-content:center;font-size:52px}.body{padding:16px}.price{font-weight:900;font-size:20px;color:var(--p)}.meta{color:var(--muted);font-size:13px;margin:7px 0 12px}.row{display:flex;justify-content:space-between;gap:10px;align-items:center}.small{padding:8px 11px;border-radius:8px;background:#eef5f3;color:var(--p);font-weight:700}.heart{font-size:20px;background:transparent}
+.features{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.feature{background:#fff;padding:20px;border:1px solid var(--border);border-radius:15px}.feature b{display:block;margin:8px 0}.feature span{color:var(--muted);font-size:14px}
+footer{background:#082f2c;color:#dcefeb;padding:35px 5%;text-align:center}footer b{color:#fff}
+.modal{position:fixed;inset:0;background:#001b1780;display:none;align-items:center;justify-content:center;padding:15px;z-index:50}.modal.open{display:flex}.box{background:#fff;border-radius:18px;width:min(520px,100%);max-height:90vh;overflow:auto;padding:24px}.box h2{margin-top:0}.close{float:right;background:#eef2f1;border-radius:50%;width:34px;height:34px}.field{margin:13px 0}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}.field input,.field select,.field textarea{width:100%;border:1px solid var(--border);border-radius:9px;padding:11px;outline:none}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--p)}.full{width:100%;padding:12px;border-radius:10px;background:var(--p);color:#fff;font-weight:800;margin-top:8px}.muted{text-align:center;color:var(--muted);font-size:13px}.dash{display:none}.dash.show{display:block}.empty{text-align:center;padding:45px;color:var(--muted);background:#fff;border:1px dashed var(--border);border-radius:15px}.toast{position:fixed;right:16px;bottom:16px;background:#123d38;color:#fff;padding:13px 17px;border-radius:10px;display:none;z-index:100}.toast.show{display:block}
+@media(max-width:800px){.navlinks{display:none}.grid{grid-template-columns:1fr 1fr}.features{grid-template-columns:1fr 1fr}.hero{padding:28px 20px}.search{flex-wrap:wrap}.search input{flex-basis:100%}}
+@media(max-width:520px){.grid,.features{grid-template-columns:1fr}.account button{padding:8px}.logo{font-size:21px}}
+</style>
 </head>
 <body>
+<div class="top">🇧🇫 PrixFaso — trouvez, comparez et publiez des offres au Burkina Faso</div>
+<nav>
+  <div class="logo">Prix<span>Faso</span></div>
+  <div class="navlinks">
+    <button onclick="go('home')">Accueil</button><button onclick="go('annonces')">Annonces</button>
+    <button onclick="go('publier')">Publier</button><button onclick="go('dashboard')">Mon espace</button>
+  </div>
+  <div class="account" id="account"><button class="outline" onclick="openModal('login')">Connexion</button><button class="primary" onclick="openModal('register')">Inscription</button></div>
+</nav>
 
-<h1>Bienvenue sur PrixFaso</h1>
-<p>Le site de location de maisons, véhicules et services au Burkina Faso.</p>
+<main id="home">
+<section class="hero">
+<h1>Les prix et services, au même endroit.</h1>
+<p>Comparez les prix, trouvez des locations, découvrez des services et publiez vos propres annonces partout au Burkina Faso.</p>
+<div class="search">
+<input id="q" placeholder="Que recherchez-vous ? ex. ciment, maison, téléphone...">
+<select id="city"><option value="">Toute ville</option><option>Ouagadougou</option><option>Bobo-Dioulasso</option><option>Koudougou</option><option>Banfora</option><option>Ouahigouya</option><option>Fada N'Gourma</option></select>
+<button onclick="searchAds()">Rechercher</button>
+</div>
+</section>
 
+<section class="section">
+<h2>Catégories</h2>
+<div class="chips">
+<button class="chip active" onclick="filterCat('Tous',this)">Tous</button><button class="chip" onclick="filterCat('Matériaux',this)">🏗️ Matériaux</button>
+<button class="chip" onclick="filterCat('Immobilier',this)">🏠 Immobilier</button><button class="chip" onclick="filterCat('Véhicules',this)">🚗 Véhicules</button>
+<button class="chip" onclick="filterCat('Électronique',this)">📱 Électronique</button><button class="chip" onclick="filterCat('Services',this)">🛠️ Services</button>
+<button class="chip" onclick="filterCat('Alimentation',this)">🌾 Alimentation</button>
+</div>
+</section>
+
+<section class="section" id="annonces"><div class="row"><h2>Annonces récentes</h2><button class="small" onclick="go('publier')">+ Publier une annonce</button></div><div id="cards" class="grid"></div></section>
+
+<section class="section">
+<h2>Pourquoi PrixFaso ?</h2>
+<div class="features">
+<div class="feature">🔎<b>Comparer</b><span>Comparez rapidement les prix proposés par plusieurs vendeurs.</span></div>
+<div class="feature">📍<b>Localiser</b><span>Filtrez les annonces par ville et trouvez les offres proches.</span></div>
+<div class="feature">📢<b>Publier</b><span>Ajoutez vos produits, locations ou services en quelques étapes.</span></div>
+<div class="feature">💬<b>Échanger</b><span>Contactez les annonceurs et gérez vos favoris depuis votre espace.</span></div>
+</div>
+</section>
+
+<section class="section dash" id="dashboard">
+<h2>Mon espace</h2><div id="dashContent"></div>
+</section>
+
+<section class="section dash" id="publier">
+<h2>Publier une annonce</h2>
+<div class="box" style="display:block;max-width:650px;margin:auto">
+<div class="field"><label>Titre</label><input id="adTitle" placeholder="Ex. Sac de ciment 50 kg"></div>
+<div class="field"><label>Catégorie</label><select id="adCat"><option>Matériaux</option><option>Immobilier</option><option>Véhicules</option><option>Électronique</option><option>Services</option><option>Alimentation</option></select></div>
+<div class="field"><label>Prix (FCFA)</label><input id="adPrice" type="number" placeholder="15000"></div>
+<div class="field"><label>Ville</label><select id="adCity"><option>Ouagadougou</option><option>Bobo-Dioulasso</option><option>Koudougou</option><option>Banfora</option><option>Ouahigouya</option><option>Fada N'Gourma</option></select></div>
+<div class="field"><label>Description</label><textarea id="adDesc" rows="4" placeholder="Décrivez votre produit ou service"></textarea></div>
+<button class="full" onclick="publishAd()">Publier</button>
+</div>
+</section>
+</main>
+
+<footer><b>PrixFaso</b><br><span>Plateforme de prix, locations et annonces de services au Burkina Faso.</span><br><br>© 2026 PrixFaso — Tous droits réservés</footer>
+
+<div class="modal" id="modal"><div class="box"><button class="close" onclick="closeModal()">×</button><div id="modalBody"></div></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const seed=[
+{id:1,title:"Ciment CPJ 35 — sac 50 kg",cat:"Matériaux",price:6500,city:"Ouagadougou",icon:"🏗️",desc:"Sac de ciment 50 kg, disponible en quantité."},
+{id:2,title:"Appartement 2 chambres",cat:"Immobilier",price:150000,city:"Ouagadougou",icon:"🏠",desc:"Appartement propre avec eau et électricité."},
+{id:3,title:"Moto en bon état",cat:"Véhicules",price:475000,city:"Bobo-Dioulasso",icon:"🏍️",desc:"Moto d'occasion, papiers disponibles."},
+{id:4,title:"Smartphone Android",cat:"Électronique",price:85000,city:"Koudougou",icon:"📱",desc:"Téléphone Android avec accessoires."},
+{id:5,title:"Maçon professionnel",cat:"Services",price:5000,city:"Ouagadougou",icon:"🛠️",desc:"Main-d'œuvre de maçonnerie, devis possible."},
+{id:6,title:"Maïs — sac",cat:"Alimentation",price:18000,city:"Banfora",icon:"🌾",desc:"Maïs disponible en sacs."}
+];
+let ads=JSON.parse(localStorage.getItem("pf_ads")||"null")||seed;
+let users=JSON.parse(localStorage.getItem("pf_users")||"[]");
+let fav=JSON.parse(localStorage.getItem("pf_fav")||"[]");
+let current=JSON.parse(localStorage.getItem("pf_current")||"null");
+let currentCat="Tous";
+
+function money(n){return Number(n).toLocaleString("fr-FR")+" FCFA"}
+function toast(t){let x=document.getElementById("toast");x.textContent=t;x.classList.add("show");setTimeout(()=>x.classList.remove("show"),2500)}
+function render(list=ads){
+ const c=document.getElementById("cards");
+ if(!list.length){c.innerHTML='<div class="empty" style="grid-column:1/-1">Aucune annonce trouvée.</div>';return}
+ c.innerHTML=list.map(a=>`<article class="card"><div class="thumb">${a.icon||"📦"}</div><div class="body"><div class="row"><strong>${esc(a.title)}</strong><button class="heart" onclick="toggleFav(${a.id})">${fav.includes(a.id)?"❤️":"♡"}</button></div><div class="meta">📍 ${esc(a.city)} · ${esc(a.cat)}</div><div class="price">${money(a.price)}</div><p class="meta">${esc(a.desc||"")}</p><div class="row"><button class="small" onclick="viewAd(${a.id})">Voir l'annonce</button><button class="small" onclick="contactAd(${a.id})">💬 Contacter</button></div></div></article>`).join("");
+}
+function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function filterCat(cat,el){currentCat=cat;document.querySelectorAll(".chip").forEach(x=>x.classList.remove("active"));el.classList.add("active");apply()}
+function apply(){let q=(document.getElementById("q").value||"").toLowerCase(), city=document.getElementById("city").value;render(ads.filter(a=>(currentCat==="Tous"||a.cat===currentCat)&&(!city||a.city===city)&&(!q||(`${a.title} ${a.cat} ${a.city} ${a.desc}`).toLowerCase().includes(q))))}
+function searchAds(){apply();document.getElementById("annonces").scrollIntoView({behavior:"smooth"})}
+function toggleFav(id){if(!current){openModal("login");return}fav=fav.includes(id)?fav.filter(x=>x!==id):[...fav,id];localStorage.setItem("pf_fav",JSON.stringify(fav));render();toast(fav.includes(id)?"Ajouté aux favoris":"Retiré des favoris")}
+function viewAd(id){let a=ads.find(x=>x.id===id);openCustom(`<h2>${esc(a.title)}</h2><p class="meta">📍 ${esc(a.city)} · ${esc(a.cat)}</p><h2 style="color:var(--p)">${money(a.price)}</h2><p>${esc(a.desc)}</p><button class="full" onclick="contactAd(${a.id});closeModal()">💬 Contacter l'annonceur</button>`)}
+function contactAd(id){if(!current){openModal("login");return}let a=ads.find(x=>x.id===id);openCustom(`<h2>Message à l'annonceur</h2><p>${esc(a.title)}</p><div class="field"><textarea id="msg" rows="5" placeholder="Bonjour, votre annonce m'intéresse..."></textarea></div><button class="full" onclick="toast('Message envoyé (mode démo)');closeModal()">Envoyer</button>`)}
+function openCustom(h){document.getElementById("modalBody").innerHTML=h;document.getElementById("modal").classList.add("open")}
+function openModal(type){
+let h=type==="login"?`<h2>Connexion</h2><div class="field"><label>Téléphone ou email</label><input id="loginId" placeholder="Ex. 70 00 00 00"></div><div class="field"><label>Mot de passe</label><input id="loginPass" type="password"></div><button class="full" onclick="login()">Se connecter</button><p class="muted">Pas encore de compte ? <a href="#" onclick="openModal('register')">Créer un compte</a></p>`:
+`<h2>Créer un compte</h2><div class="field"><label>Nom complet</label><input id="regName" placeholder="Votre nom"></div><div class="field"><label>Téléphone</label><input id="regPhone" placeholder="70 00 00 00"></div><div class="field"><label>Email (optionnel)</label><input id="regEmail" type="email"></div><div class="field"><label>Mot de passe</label><input id="regPass" type="password" placeholder="Au moins 6 caractères"></div><button class="full" onclick="register()">Créer mon compte</button><p class="muted">Déjà inscrit ? <a href="#" onclick="openModal('login')">Se connecter</a></p>`;
+openCustom(h)
+}
+function closeModal(){document.getElementById("modal").classList.remove("open")}
+function register(){let name=document.getElementById("regName").value.trim(),phone=document.getElementById("regPhone").value.trim(),pass=document.getElementById("regPass").value;if(!name||!phone||pass.length<6){toast("Remplissez les champs correctement");return}if(users.some(u=>u.phone===phone)){toast("Ce numéro existe déjà");return}let u={id:Date.now(),name,phone,pass,email:document.getElementById("regEmail").value};users.push(u);localStorage.setItem("pf_users",JSON.stringify(users));current={id:u.id,name:u.name,phone:u.phone};localStorage.setItem("pf_current",JSON.stringify(current));closeModal();updateAccount();toast("Compte créé avec succès")}
+function login(){let id=document.getElementById("loginId").value.trim(),pass=document.getElementById("loginPass").value,u=users.find(x=>(x.phone===id||x.email===id)&&x.pass===pass);if(!u){toast("Identifiants incorrects");return}current={id:u.id,name:u.name,phone:u.phone};localStorage.setItem("pf_current",JSON.stringify(current));closeModal();updateAccount();toast("Connexion réussie")}
+function logout(){current=null;localStorage.removeItem("pf_current");updateAccount();go("home");toast("Déconnexion effectuée")}
+function updateAccount(){document.getElementById("account").innerHTML=current?`<button onclick="go('dashboard')">👤 ${esc(current.name.split(" ")[0])}</button><button class="outline" onclick="logout()">Déconnexion</button>`:`<button class="outline" onclick="openModal('login')">Connexion</button><button class="primary" onclick="openModal('register')">Inscription</button>`}
+function publishAd(){if(!current){openModal("login");return}let title=document.getElementById("adTitle").value.trim(),price=Number(document.getElementById("adPrice").value),desc=document.getElementById("adDesc").value.trim();if(!title||!price){toast("Ajoutez un titre et un prix");return}let cat=document.getElementById("adCat").value,city=document.getElementById("adCity").value,icons={"Matériaux":"🏗️","Immobilier":"🏠","Véhicules":"🚗","Électronique":"📱","Services":"🛠️","Alimentation":"🌾"};ads.unshift({id:Date.now(),title,cat,price,city,desc,icon:icons[cat],owner:current.id});localStorage.setItem("pf_ads",JSON.stringify(ads));document.querySelectorAll("#publier input,#publier textarea").forEach(x=>x.value="");render();toast("Annonce publiée");go("annonces")}
+function go(id){document.querySelectorAll(".dash").forEach(x=>x.classList.remove("show"));if(id==="dashboard"){if(!current){openModal("login");return}document.getElementById("dashboard").classList.add("show");renderDash();document.getElementById("dashboard").scrollIntoView({behavior:"smooth"})}else if(id==="publier"){if(!current){openModal("login");return}document.getElementById("publier").classList.add("show");document.getElementById("publier").scrollIntoView({behavior:"smooth"})}else document.getElementById("home").scrollIntoView({behavior:"smooth"})}
+function renderDash(){let mine=ads.filter(a=>a.owner===current.id),favs=ads.filter(a=>fav.includes(a.id));document.getElementById("dashContent").innerHTML=`<div class="features"><div class="feature">👤<b>${esc(current.name)}</b><span>${esc(current.phone)}</span></div><div class="feature">📢<b>${mine.length} annonce(s)</b><span>Vos publications</span></div><div class="feature">❤️<b>${favs.length} favori(s)</b><span>Vos annonces sauvegardées</span></div><div class="feature">💬<b>Messages</b><span>Votre messagerie</span></div></div><div class="section"><h3>Mes annonces</h3>${mine.length?`<div class="grid">${mine.map(a=>`<article class="card"><div class="body"><b>${esc(a.title)}</b><p class="price">${money(a.price)}</p><button class="small" onclick="deleteAd(${a.id})">Supprimer</button></div></article>`).join("")}</div>`:'<div class="empty">Vous n’avez pas encore publié d’annonce.</div>'}</div>`}
+function deleteAd(id){ads=ads.filter(a=>a.id!==id);localStorage.setItem("pf_ads",JSON.stringify(ads));render();renderDash();toast("Annonce supprimée")}
+updateAccount();render();
+</script>
 </body>
 </html>
+
